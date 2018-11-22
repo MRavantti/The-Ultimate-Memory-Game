@@ -1,44 +1,56 @@
-@keyframes float {
-	0% {
-		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-		transform: translatey(0px);
-	}
-	50% {
-		box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
-		transform: translatey(-20px);
-	}
-	100% {
-		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-		transform: translatey(0px);
-	}
+
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 body {
+	display: flex;
   height: 100vh;
 }
+
 
 .board {
+	display: flex;
+	margin: auto;
   background-color: chocolate;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 750px;
+  height: 670px;
+	perspective: 1000px;
 }
 
-.card-container {
+.deck {
   display: grid;
   grid-template: repeat(4, 2fr) / repeat(5, 2fr);
   height: 85vh;
   width: 65vw;
 }
 
-.cards {
+.card {
   background-color: aliceblue;
   margin: .5rem;
+	transform-style: preserve-3d;
+	transition: transform .5s;
 }
 
-.cards:hover {
-  background-color: white;
-  animation: float 2s ease-in-out infinite;
+
+.card:hover {
+	cursor: pointer;
+}
+
+.card.flip {
+	transform: rotateY(180deg);
+	animation-duration: .75s;
+}
+
+.front-face,
+.back-face {
+	border-radius: 5px;
+	backface-visibility: hidden;
+}
+
+.font-face {
+	transform: rotateY(180deg);
 }
