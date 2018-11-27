@@ -1,17 +1,18 @@
-let cards = [
-  { card: "one", image: "" },
-  { card: "two", image: "" },
-  { card: "three", image: "" },
-  { card: "four", image: "" },
-  { card: "five", image: "" },
-  { card: "six", image: "" },
-  { card: "seven", image: "" },
-  { card: "eight", image: "" },
-  { card: "nine", image: "" },
-  { card: "ten", image: "" },
+let card = [
+  { name: "one", image: "" },
+  { name: "two", image: "" },
+  { name: "three", image: "" },
+  { name: "four", image: "" },
+  { name: "five", image: "" },
+  { name: "six", image: "" },
+  { name: "seven", image: "" },
+  { name: "eight", image: "" },
+  { name: "nine", image: "" },
+  { name: "ten", image: "" },
 
 ]
-let dubCards = cards.slice();
+let dubCards = card.slice();
+let cards = card.concat(dubCards);
 
 function flipCard() {
   this.classList.toggle('flip');
@@ -33,7 +34,24 @@ function shuffleCards(array) {
   return array;
 }
 
-card = shuffleCards(Array.from(cards));
-console.log(dubCards, cards);
+cards = shuffleCards(Array.from(cards));
+console.log(cards);
 
+const board = document.querySelector(".board");
 
+const deck = document.createElement("div");
+deck.classList.add("deck");
+
+board.appendChild(deck);
+
+cards.forEach(i => {
+  const card = document.createElement("div");
+  
+  card.classList.add('card');
+  
+  card.dataset.name = i.name;
+  
+  deck.appendChild(card);
+  
+  card.addEventListener("click", flipCard);
+});
