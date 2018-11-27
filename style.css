@@ -43,10 +43,10 @@ body {
 .card.flip {
 	transform: rotateY(180deg);
 	animation-duration: .75s;
+	backface-visibility: visible;
 }
 
-.front-face,
-.back-face {
+.card {
 	border-radius: 5px;
 	backface-visibility: hidden;
 }
