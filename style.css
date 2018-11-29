@@ -15,17 +15,17 @@ body {
 .board {
 	display: flex;
 	margin: auto;
-  background-color: chocolate;
-  width: 750px;
-  height: 670px;
+  background-color: #4a873b;
+  width: 65vw;
+  height: 65vh;
 	perspective: 1000px;
 }
 
 .deck {
   display: grid;
   grid-template: repeat(4, 2fr) / repeat(5, 2fr);
-  height: 85vh;
-  width: 65vw;
+  height: 100%;
+  width: 100%;
 }
 
 .card {
@@ -33,6 +33,8 @@ body {
   margin: .5rem;
 	transform-style: preserve-3d;
 	transition: transform .5s;
+	border-radius: 5px;
+	background-size: 100% 100%;
 }
 
 
@@ -43,9 +45,6 @@ body {
 .card.flip {
 	transform: rotateY(180deg);
 	animation-duration: .75s;
-
+	background: black;
 }
 
-.card {
-	border-radius: 5px;
-}
