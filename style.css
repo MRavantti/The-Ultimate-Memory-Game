@@ -31,7 +31,6 @@ body {
 
 .card {
 	position: relative;
-  background-color: aliceblue;
   margin: .5rem;
 	border-radius: 5px;
 	transform-style: preserve-3d;

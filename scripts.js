@@ -107,7 +107,7 @@ function match() {
   }
   
   function scoreKeeper() {
-    if (pairs === 1) {
+    if (pairs === 10) {
       popup.classList.add('show');
     }
   }
