@@ -26,6 +26,7 @@ let noMatch = null;
 let pairs = 0;
 
 //shuffle cards
+
 cards.sort(() => 0.5 - Math.random());
 
 const board = document.querySelector('.board');
@@ -69,31 +70,47 @@ function flipCard() {
       checkForMatch();
     }
     clicked.classList.add('flip');
-  }
+  };
   
-}
+};
 
 function checkForMatch() {
    let isMatch = firstCard.dataset.id === secondCard.dataset.id;
-   isMatch ? disableCards() : unflipCards();
-}
+   isMatch ? match() : unflipCards();
+};
 
-function disableCards() {
-    firstCard.removeEventListener('click', flipCard);
-    secondCard.removeEventListener('click', flipCard);
+function match() {
     pairs++;
     count = 0;
-  }
+    resetCards();
+    scoreKeeper();
+    
+  };
   
   function unflipCards() {
     setTimeout(() => {
       count = 0;
       firstCard.classList.remove('flip');
       secondCard.classList.remove('flip');
-
-    }, 1500);
+      resetCards();
+    }, 1300);
+  };
+  
+  function resetCards() {
+    [firstCard, secondCard] = [null, null];
   }
   
+  function scoreKeeper() {
+    if (pairs === 1) {
+      popup.classList.add('show');
+    }
+  }
+  
+  function playAgain() {
+    popup.classList.remove('show')
+  }
+  
+  let popup = document.getElementById("popup")
   const newCards = document.querySelectorAll('.card');
   newCards.forEach(carder => carder.addEventListener('click', flipCard));
 
