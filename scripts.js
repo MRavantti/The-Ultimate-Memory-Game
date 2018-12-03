@@ -18,6 +18,7 @@ const card = [
 
 const dubCards = card.slice();
 const cards = card.concat(dubCards);
+
 let firstCard = '';
 let secondCard = '';
 let count = 0;
@@ -53,21 +54,37 @@ cards.forEach(i => {
 
 
 function flipCard() {
-  
   const clicked = event.target;
+  
   if (count < 2) {
-    clicked.classList.add('flip');
-    clicked.lastChild.classList.remove("back-face");
     count++;
     if (count === 1) {
       firstCard = event.target;
     }
     if (count === 2) {
       secondCard = event.target;
+      
+      checkForMatch();
     }
+    clicked.classList.add('flip');
   }
   
 }
 
+function checkForMatch() {
+   let isMatch = firstCard.dataset.id === secondCard.dataset.id;
+   isMatch ? disableCards() : unflipCards();
+}
+
+  
+  function unflipCards() {
+    setTimeout(() => {
+      count = 0;
+      firstCard.classList.remove('flip');
+      secondCard.classList.remove('flip');
+
+    }, 1500);
+  }
+  
 
 deck.addEventListener('click', flipCard);
