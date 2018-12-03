@@ -16,27 +16,30 @@ const card = [
 // ta bort loading när sidan har laddats
 // göm board när body har classen loading
 
+document.body.onload = startGame();
+
 const dubCards = card.slice();
 const cards = card.concat(dubCards);
 
 let firstCard = '';
 let secondCard = '';
 let count = 0;
-let noMatch = null;
+
 let pairs = 0;
 
 //shuffle cards
 
-cards.sort(() => 0.5 - Math.random());
 
-const board = document.querySelector('.board');
-const deck = document.createElement('div');
 
-deck.classList.add('deck');
+function createCards(e) {
+  const board = document.querySelector('.board');
+  const deck = document.createElement('div');
+  deck.classList.add('deck');
+  
 
-board.appendChild(deck);
-
-cards.forEach(i => {
+  board.appendChild(deck);
+  
+e.forEach(i => {
   
   const backFace = document.createElement('div');
   backFace.classList.add('back-face');
@@ -52,11 +55,13 @@ cards.forEach(i => {
   frontFace.style.backgroundImage = `url(${i.image})`;
   
 });
+}
 
 
 function flipCard() {
   const clicked = event.target;
   
+
   if (this === firstCard) return;
   
   if (count < 2) {
@@ -82,6 +87,7 @@ function checkForMatch() {
 function match() {
     pairs++;
     count = 0;
+    
     resetCards();
     scoreKeeper();
     
@@ -108,9 +114,28 @@ function match() {
   
   function playAgain() {
     popup.classList.remove('show')
+    pairs = 0;
+    removeCards();
+    startGame();
+  }
+  
+  function startGame() {
+    const dubCards = card.slice();
+    const cards = card.concat(dubCards);
+    cards.sort(() => 0.5 - Math.random());
+    
+    createCards(cards);
+    const cardsDiv = document.querySelectorAll('.card');
+    cardsDiv.forEach(card => card.addEventListener('click', flipCard));
+    
+  }
+  
+  function removeCards() {
+    const elements = document.getElementsByClassName("deck");
+    while (elements.length > 0) elements[0].remove();
   }
   
   let popup = document.getElementById("popup")
-  const newCards = document.querySelectorAll('.card');
-  newCards.forEach(carder => carder.addEventListener('click', flipCard));
+  
+
 
