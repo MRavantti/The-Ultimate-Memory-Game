@@ -35,8 +35,7 @@ body {
   margin: .5rem;
 	border-radius: 5px;
 	transform-style: preserve-3d;
-	transition: transform .5s;
-	animation-duration: .75s;
+	transition: transform .8s;
 }
 
 .back-face,
@@ -46,21 +45,22 @@ body {
 	height: 100%;
 	width: 100%;
 	pointer-events: none;
-	backface-visibility: hidden;
 	border-radius: 5px;
+	backface-visibility: hidden;
 	
 }
+
 
 .card:hover {
 	cursor: pointer;
 }
 
-.front-face {
-	transform: rotateY(180deg);
-}
 
 .card.flip {
 	transform: rotateY(180deg);
 }
 
+.front-face {
+	transform: rotateY(-180deg);
+}
 
