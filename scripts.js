@@ -16,7 +16,7 @@ const card = [
 // ta bort loading när sidan har laddats
 // göm board när body har classen loading
 
-document.body.onload = startGame();
+startGame();
 
 const dubCards = card.slice();
 const cards = card.concat(dubCards);
@@ -29,39 +29,36 @@ let pairs = 0;
 
 //shuffle cards
 
-
-
 function createCards(e) {
   const board = document.querySelector('.board');
   const deck = document.createElement('div');
   deck.classList.add('deck');
   let matched = false;
-
+  
   board.appendChild(deck);
   
-e.forEach(i => {
-  
-  const backFace = document.createElement('div');
-  backFace.classList.add('back-face');
-  const frontFace = document.createElement('div');
-  frontFace.classList.add('front-face');
-  const card = document.createElement('div');
-  card.classList.add('card');
-  card.dataset.id = i.id;
-  deck.appendChild(card);
-  card.appendChild(frontFace);
-  card.appendChild(backFace);
-  backFace.style.backgroundImage = `url(https://cdn.europosters.eu/image/750/posters/rick-and-morty-watch-i50046.jpg)`;
-  frontFace.style.backgroundImage = `url(${i.image})`;
-  
-});
+  e.forEach(i => {
+    
+    const backFace = document.createElement('div');
+    backFace.classList.add('back-face');
+    const frontFace = document.createElement('div');
+    frontFace.classList.add('front-face');
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.id = i.id;
+    deck.appendChild(card);
+    card.appendChild(frontFace);
+    card.appendChild(backFace);
+    backFace.style.backgroundImage = `url(https://cdn.europosters.eu/image/750/posters/rick-and-morty-watch-i50046.jpg)`;
+    frontFace.style.backgroundImage = `url(${i.image})`;
+    
+  });
 }
 
-
-function flipCard() {
+function flipCard(event) {
   const clicked = event.target;
   let matchedCards = document.getElementsByClassName('.match .flipped');
-
+  
   if (this === firstCard || this === matchedCards) return;
   
   if (count < 2) {
@@ -80,65 +77,62 @@ function flipCard() {
 };
 
 function checkForMatch() {
-   let isMatch = firstCard.dataset.id === secondCard.dataset.id;
-   isMatch ? match(firstCard, secondCard) : unflipCards();
+  let isMatch = firstCard.dataset.id === secondCard.dataset.id;
+  isMatch ? match(firstCard, secondCard) : unflipCards();
 };
 
 function match() {
-    pairs++;
-    count = 0;
-    disableCards();
-    resetCards();
-    scoreKeeper();
-    
-  };
-  function disableCards() {
+  pairs++;
+  count = 0;
+  disableCards();
+  resetCards();
+  scoreKeeper();
+  
+};
+function disableCards() {
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
 }
-  function unflipCards() {
-    setTimeout(() => {
-      count = 0;
-      firstCard.classList.remove('flip');
-      secondCard.classList.remove('flip');
-      resetCards();
-    }, 1300);
-  };
-  
-  function resetCards() {
-    [firstCard, secondCard] = [null, null];
-  }
-  
-  function scoreKeeper() {
-    if (pairs === 10) {
-      popup.classList.add('show');
-    }
-  }
-  
-  function playAgain() {
-    popup.classList.remove('show')
-    pairs = 0;
-    removeCards();
-    startGame();
-  }
-  
-  function startGame() {
-    const dubCards = card.slice();
-    const cards = card.concat(dubCards);
-    cards.sort(() => 0.5 - Math.random());
-    
-    createCards(cards);
-    const cardsDiv = document.querySelectorAll('.card');
-    cardsDiv.forEach(card => card.addEventListener('click', flipCard));
-    
-  }
-  
-  function removeCards() {
-    const elements = document.getElementsByClassName("deck");
-    while (elements.length > 0) elements[0].remove();
-  }
-  
-  let popup = document.getElementById("popup")
-  
+function unflipCards() {
+  setTimeout(() => {
+    count = 0;
+    firstCard.classList.remove('flip');
+    secondCard.classList.remove('flip');
+    resetCards();
+  }, 1300);
+};
 
+function resetCards() {
+  [firstCard, secondCard] = [null, null];
+}
 
+function scoreKeeper() {
+  if (pairs === 10) {
+    popup.classList.add('show');
+  }
+}
+
+function playAgain() {
+  popup.classList.remove('show')
+  pairs = 0;
+  removeCards();
+  startGame();
+}
+
+function startGame() {
+  const dubCards = card.slice();
+  const cards = card.concat(dubCards);
+  cards.sort(() => 0.5 - Math.random());
+  
+  createCards(cards);
+  const cardsDiv = document.querySelectorAll('.card');
+  cardsDiv.forEach(card => card.addEventListener('click', flipCard));
+  
+}
+
+function removeCards() {
+  const elements = document.getElementsByClassName("deck");
+  while (elements.length > 0) elements[0].remove();
+}
+
+let popup = document.getElementById("popup");

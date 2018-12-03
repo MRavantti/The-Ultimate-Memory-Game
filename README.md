@@ -32,12 +32,15 @@ this is a a game of memory. for assignment in JavaScript class.
 $ git clone https://github.com/MRavantti/The-Ultimate-Memory-Game.git
 ```
 
-- Setup a dedicated webserver root in the cloned directory e.g: `/home/${USER}/sites/The-Ultimate-Memory-Game/`.
+- Setup a dedicated web-server root in the cloned directory e.g: `/home/${USER}/sites/The-Ultimate-Memory-Game/`.
 
 
-- Enjoy the The landing page!
+- Good luck testing your memory!
 
 ## Creator
 - [Mikael Ravantti](https://github.com/MRavantti)
+
+## testers 
+- [Erik Arvidsson](https://github.com/erikarvidsson)
 
 The MIT License ([MIT](https://raw.githubusercontent.com/MRavantti/fThe-Ultimate-Memory-Game/master/LICENSE))
