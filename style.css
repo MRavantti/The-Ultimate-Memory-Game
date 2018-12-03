@@ -8,7 +8,8 @@
 
 body {
 	display: flex;
-  height: 100vh;
+	height: 100vh;
+	width: 100vw;
 }
 
 
@@ -16,8 +17,8 @@ body {
 	display: flex;
 	margin: auto;
   background-color: #4a873b;
-  width: 65vw;
-  height: 65vh;
+  width: 45%;
+  height: 85%;
 	perspective: 1000px;
 }
 
@@ -29,12 +30,10 @@ body {
 }
 
 .card {
+	position: relative;
   background-color: aliceblue;
   margin: .5rem;
-	transform-style: preserve-3d;
-	transition: transform .5s;
-	border-radius: 5px;
-	background-size: 100% 100%;
+	overflow: hidden;
 }
 
 
@@ -42,9 +41,24 @@ body {
 	cursor: pointer;
 }
 
-.card.flip {
+.back-face.flip,
+.front-face.flip {
 	transform: rotateY(180deg);
 	animation-duration: .75s;
-	background: black;
 }
 
+.back-face,
+.front-face{
+	position: absolute;
+	background-size: 100% 100%;
+	height: 100%;
+	width: 100%;
+	transform-style: preserve-3d;
+	transition: transform .5s;
+	border-radius: 5px;
+	backface-visibility: hidden;
+}
+
+.front-face {
+	transition: transform .5s;
+}
