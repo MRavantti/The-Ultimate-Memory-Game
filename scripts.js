@@ -76,6 +76,12 @@ function checkForMatch() {
    isMatch ? disableCards() : unflipCards();
 }
 
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+    pairs++;
+    count = 0;
+  }
   
   function unflipCards() {
     setTimeout(() => {
@@ -86,5 +92,6 @@ function checkForMatch() {
     }, 1500);
   }
   
+  const newCards = document.querySelectorAll('.card');
+  newCards.forEach(carder => carder.addEventListener('click', flipCard));
 
-deck.addEventListener('click', flipCard);
