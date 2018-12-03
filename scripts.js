@@ -11,23 +11,21 @@ const card = [
   { id: "ten", image: "https://www.dailydot.com/wp-content/uploads/d42/e2/Screen20Shot202017-01-0320at204.52.2020PM.png" },
 ];
 
+// TODO: 
+// lägg till klass på loading body
+// ta bort loading när sidan har laddats
+// göm board när body har classen loading
+
 const dubCards = card.slice();
 const cards = card.concat(dubCards);
+let firstCard = '';
+let secondCard = '';
+let count = 0;
+let noMatch = null;
+let pairs = 0;
 
 //shuffle cards
 cards.sort(() => 0.5 - Math.random());
-
-function flipCard() {
-  
-  const clicked = event.target;
-  
-  if (clicked.nodeName === 'card') { return; }
-  clicked.classList.toggle('flip');
-  
-  
-};
-
-
 
 const board = document.querySelector('.board');
 const deck = document.createElement('div');
@@ -52,5 +50,24 @@ cards.forEach(i => {
   frontFace.style.backgroundImage = `url(${i.image})`;
   
 });
+
+
+function flipCard() {
+  
+  const clicked = event.target;
+  if (count < 2) {
+    clicked.classList.add('flip');
+    clicked.lastChild.classList.remove("back-face");
+    count++;
+    if (count === 1) {
+      firstCard = event.target;
+    }
+    if (count === 2) {
+      secondCard = event.target;
+    }
+  }
+  
+}
+
 
 deck.addEventListener('click', flipCard);
