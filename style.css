@@ -33,19 +33,9 @@ body {
 	position: relative;
   background-color: aliceblue;
   margin: .5rem;
-	overflow: hidden;
+	border-radius: 5px;
 	transform-style: preserve-3d;
 	transition: transform .5s;
-	border-radius: 5px;
-}
-
-
-.card:hover {
-	cursor: pointer;
-}
-
-.card.flip {
-	transform: rotateY(180deg);
 	animation-duration: .75s;
 }
 
@@ -56,9 +46,21 @@ body {
 	height: 100%;
 	width: 100%;
 	pointer-events: none;
+	backface-visibility: hidden;
+	border-radius: 5px;
+	
+}
 
+.card:hover {
+	cursor: pointer;
 }
 
 .front-face {
-  transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
+
+.card.flip {
+	transform: rotateY(180deg);
+}
+
+
