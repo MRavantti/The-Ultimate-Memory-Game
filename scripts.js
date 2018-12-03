@@ -24,7 +24,7 @@ const cards = card.concat(dubCards);
 let firstCard = '';
 let secondCard = '';
 let count = 0;
-
+let noMatch = null;
 let pairs = 0;
 
 //shuffle cards
@@ -35,7 +35,7 @@ function createCards(e) {
   const board = document.querySelector('.board');
   const deck = document.createElement('div');
   deck.classList.add('deck');
-  
+  let matched = false;
 
   board.appendChild(deck);
   
@@ -60,9 +60,9 @@ e.forEach(i => {
 
 function flipCard() {
   const clicked = event.target;
-  
+  let matchedCards = document.getElementsByClassName('.match .flipped');
 
-  if (this === firstCard) return;
+  if (this === firstCard || this === matchedCards) return;
   
   if (count < 2) {
     count++;
@@ -71,28 +71,31 @@ function flipCard() {
     }
     if (count === 2) {
       secondCard = event.target;
-      
       checkForMatch();
+      
     }
     clicked.classList.add('flip');
   };
-  
+  noMatch = clicked;
 };
 
 function checkForMatch() {
    let isMatch = firstCard.dataset.id === secondCard.dataset.id;
-   isMatch ? match() : unflipCards();
+   isMatch ? match(firstCard, secondCard) : unflipCards();
 };
 
 function match() {
     pairs++;
     count = 0;
-    
+    disableCards();
     resetCards();
     scoreKeeper();
     
   };
-  
+  function disableCards() {
+  firstCard.removeEventListener('click', flipCard);
+  secondCard.removeEventListener('click', flipCard);
+}
   function unflipCards() {
     setTimeout(() => {
       count = 0;
