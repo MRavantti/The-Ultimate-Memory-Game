@@ -56,6 +56,8 @@ cards.forEach(i => {
 function flipCard() {
   const clicked = event.target;
   
+  if (this === firstCard) return;
+  
   if (count < 2) {
     count++;
     if (count === 1) {
