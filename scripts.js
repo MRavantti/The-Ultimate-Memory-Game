@@ -57,9 +57,9 @@ function createCards(e) {
 
 function flipCard(event) {
   const clicked = event.target;
-  let matchedCards = document.getElementsByClassName('.match .flipped');
+
   
-  if (this === firstCard || this === matchedCards) return;
+  if (this === firstCard) return;
   
   if (count < 2) {
     count++;
