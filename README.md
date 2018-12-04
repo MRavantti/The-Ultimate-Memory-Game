@@ -42,6 +42,7 @@ $ git clone https://github.com/MRavantti/The-Ultimate-Memory-Game.git
 
 ## testers
 - [Erik Arvidsson](https://github.com/erikarvidsson)
+- [Samuel Johansson](https://github.com/WebSamuel90)
 
 
 
