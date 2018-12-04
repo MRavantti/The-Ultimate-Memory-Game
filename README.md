@@ -47,4 +47,4 @@ $ git clone https://github.com/MRavantti/The-Ultimate-Memory-Game.git
 
 
 
-The MIT License ([MIT](https://raw.githubusercontent.com/MRavantti/fThe-Ultimate-Memory-Game/master/LICENSE))
+The MIT License ([MIT](https://raw.githubusercontent.com/MRavantti/The-Ultimate-Memory-Game/master/LICENSE))
