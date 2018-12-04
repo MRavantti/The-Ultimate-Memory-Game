@@ -8,17 +8,26 @@
 
 body {
 	display: flex;
+	flex-direction: column;
 	height: 100vh;
 	width: 100vw;
 }
 
+.title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 30px;
+}
 
 .board {
 	display: flex;
 	margin: auto;
   background-color: #4a873b;
-  width: 45%;
-  height: 85%;
+  width: 85vw;
+  height: 55vh;
 	perspective: 1000px;
 }
 
@@ -124,4 +133,11 @@ body {
 .show {
 	visibility: visible;
 	opacity: 100;
+}
+
+@media only screen and (min-width: 850px) {
+	.board {
+		width: 55vw;
+	  height: 75vh;
+	}
 }

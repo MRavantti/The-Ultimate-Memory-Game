@@ -20,7 +20,7 @@ this is a a game of memory. for assignment in JavaScript class.
 - The repository must contain a LICENSE file.
 - The repository must contain a .editorconfig file with your preferred settings.
 
-### used Languages 
+### used Languages
 - JavaScript
 - HTML
 - CSS
@@ -40,7 +40,10 @@ $ git clone https://github.com/MRavantti/The-Ultimate-Memory-Game.git
 ## Creator
 - [Mikael Ravantti](https://github.com/MRavantti)
 
-## testers 
+## testers
 - [Erik Arvidsson](https://github.com/erikarvidsson)
+
+
+
 
 The MIT License ([MIT](https://raw.githubusercontent.com/MRavantti/fThe-Ultimate-Memory-Game/master/LICENSE))
