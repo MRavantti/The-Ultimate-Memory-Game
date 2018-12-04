@@ -16,7 +16,6 @@ const card = [
 startGame();
 
 // Duplication of the array.
-
 const dubCards = card.slice();
 const cards = card.concat(dubCards);
 
@@ -24,7 +23,6 @@ const cards = card.concat(dubCards);
 let popup = document.getElementById("popup");
 
 // variables for the game
-
 let firstCard = '';
 let secondCard = '';
 let count = 0;
@@ -35,33 +33,37 @@ function createCards(e) {
   const board = document.querySelector('.board');
   const deck = document.createElement('div');
   deck.classList.add('deck');
-  
+
   board.appendChild(deck);
-  
+
   e.forEach(i => {
-    
+
     const backFace = document.createElement('div');
     backFace.classList.add('back-face');
+
     const frontFace = document.createElement('div');
     frontFace.classList.add('front-face');
+
     const card = document.createElement('div');
     card.classList.add('card');
     card.dataset.id = i.id;
+
     deck.appendChild(card);
     card.appendChild(frontFace);
     card.appendChild(backFace);
+
     backFace.style.backgroundImage = `url(https://cdn.europosters.eu/image/750/posters/rick-and-morty-watch-i50046.jpg)`;
     frontFace.style.backgroundImage = `url(${i.image})`;
-    
+
   });
 }
 
 function flipCard(event) {
   const clicked = event.target;
 
-  
+
   if (this === firstCard) return;
-  
+
   if (count < 2) {
     count++;
     if (count === 1) {
@@ -70,7 +72,7 @@ function flipCard(event) {
     if (count === 2) {
       secondCard = event.target;
       checkForMatch();
-      
+
     }
     clicked.classList.add('flip');
   };
@@ -79,72 +81,83 @@ function flipCard(event) {
 
 // Check for match.
 function checkForMatch() {
+
   let isMatch = firstCard.dataset.id === secondCard.dataset.id;
   isMatch ? match(firstCard, secondCard) : unflipCards();
 };
 
 // If match add one to pairs variable and reset the count.
 function match() {
+
   pairs++;
   count = 0;
   disableCards();
   resetCards();
   scoreKeeper();
-  
+
 };
 
 // disable the click event for the matched cards.
 function disableCards() {
+
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
 }
 
 // reset cards that did not match
-
 function unflipCards() {
   setTimeout(() => {
+
     count = 0;
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
     resetCards();
+
   }, 1300);
 };
 
 // reset the first and second card variable.
 function resetCards() {
+
   [firstCard, secondCard] = [null, null];
 }
 
 // keeps the score for all the matches and show the winning screen
 function scoreKeeper() {
   if (pairs === 10) {
+
     popup.classList.add('show');
   }
 }
 
 //removes the winning screen and reset pairs variable.
 function playAgain() {
+
   popup.classList.remove('show')
   pairs = 0;
-  removeCards();
+  removeDeck();
   startGame();
 }
 
 //creates a new game.
 function startGame() {
+
   const dubCards = card.slice();
   const cards = card.concat(dubCards);
+
   cards.sort(() => 0.5 - Math.random());
-  
+
   createCards(cards);
+
   const cardsDiv = document.querySelectorAll('.card');
   cardsDiv.forEach(card => card.addEventListener('click', flipCard));
-  
+
 }
 
 //remove the old deck.
+function removeDeck() {
 
-function removeCards() {
   const elements = document.getElementsByClassName("deck");
   while (elements.length > 0) elements[0].remove();
+
 }
