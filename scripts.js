@@ -11,29 +11,30 @@ const card = [
   { id: "ten", image: "https://www.dailydot.com/wp-content/uploads/d42/e2/Screen20Shot202017-01-0320at204.52.2020PM.png" },
 ];
 
-// TODO: 
-// lägg till klass på loading body
-// ta bort loading när sidan har laddats
-// göm board när body har classen loading
+
 
 startGame();
+
+// Duplication of the array.
 
 const dubCards = card.slice();
 const cards = card.concat(dubCards);
 
+// create an element for the winning screen.
+let popup = document.getElementById("popup");
+
+// variables for the game
+
 let firstCard = '';
 let secondCard = '';
 let count = 0;
-let noMatch = null;
 let pairs = 0;
 
-//shuffle cards
-
+// create the cards
 function createCards(e) {
   const board = document.querySelector('.board');
   const deck = document.createElement('div');
   deck.classList.add('deck');
-  let matched = false;
   
   board.appendChild(deck);
   
@@ -73,14 +74,16 @@ function flipCard(event) {
     }
     clicked.classList.add('flip');
   };
-  noMatch = clicked;
+
 };
 
+// Check for match.
 function checkForMatch() {
   let isMatch = firstCard.dataset.id === secondCard.dataset.id;
   isMatch ? match(firstCard, secondCard) : unflipCards();
 };
 
+// If match add one to pairs variable and reset the count.
 function match() {
   pairs++;
   count = 0;
@@ -89,10 +92,15 @@ function match() {
   scoreKeeper();
   
 };
+
+// disable the click event for the matched cards.
 function disableCards() {
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
 }
+
+// reset cards that did not match
+
 function unflipCards() {
   setTimeout(() => {
     count = 0;
@@ -102,16 +110,19 @@ function unflipCards() {
   }, 1300);
 };
 
+// reset the first and second card variable.
 function resetCards() {
   [firstCard, secondCard] = [null, null];
 }
 
+// keeps the score for all the matches and show the winning screen
 function scoreKeeper() {
   if (pairs === 10) {
     popup.classList.add('show');
   }
 }
 
+//removes the winning screen and reset pairs variable.
 function playAgain() {
   popup.classList.remove('show')
   pairs = 0;
@@ -119,6 +130,7 @@ function playAgain() {
   startGame();
 }
 
+//creates a new game.
 function startGame() {
   const dubCards = card.slice();
   const cards = card.concat(dubCards);
@@ -130,9 +142,9 @@ function startGame() {
   
 }
 
+//remove the old deck.
+
 function removeCards() {
   const elements = document.getElementsByClassName("deck");
   while (elements.length > 0) elements[0].remove();
 }
-
-let popup = document.getElementById("popup");
